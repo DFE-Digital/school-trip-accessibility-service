@@ -1,0 +1,66 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Index" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+
+        <h1 class="govuk-heading-xl">
+            Give permission for your child to go on a school trip
+        </h1>
+
+        <p class="govuk-body">This service enables you to:</p>
+
+        <ol class="govuk-list govuk-list--bullets">
+            <li>retrieve details of a school trip</li>
+            <li>accept or reject the request for your child to go on the trip</li>
+            <li>provide emergency contact details</li>
+            <li>pay any due fees for the trip</li>
+        </ol>
+
+        <p>The process takes about 5 minutes.</p>
+
+        <h1 class="govuk-heading-l">
+            Information you'll need:
+        </h1>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>the trip reference number</li>
+            <li>your child's pupil number</li>
+            <li>you may need a credit or debit card if a fee is due</li>
+        </ul>
+
+
+
+
+        <h2 class="govuk-heading-l">
+            Get started
+        </h2>
+
+
+        <a href="/service/q1" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+            Start now
+            <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+                viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+            </svg>
+        </a>
+
+
+        <h3 class="govuk-heading-m">
+            Give feedback about this service
+        </h3>
+
+        <p>If you have any feedback, comments, questions or ideas for this service, you can <a
+                href="https://design.education.gov.uk/design-ops">contact the DesignOps team</a> at the Department for
+            Education
+            who have built this service.</p>
+
+    </div>
+</div>
+
+{% endblock %}

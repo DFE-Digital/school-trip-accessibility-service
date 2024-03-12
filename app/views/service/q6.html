@@ -1,0 +1,217 @@
+{% extends "layouts/broken.html" %}
+
+{% set pageName="Details" %}
+
+{% block beforeContent %}
+
+<a href="/service/q5" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% set chipError = false %}
+
+{% for error in errors %}
+{% if error.field == 'chip' %}
+{% set chipError = true %}
+{% endif %}
+{% endfor %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if errors %}
+    <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1"
+      data-module="govuk-error-summary">
+      <h2 class="govuk-error-summary__title" id="error-summary-title">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          {% for error in errors %}
+          <li>
+            <a href="#{{ error.field }}">{{ error.message }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+
+    <h1 class="govuk-heading-l">Pay the fee</h1>
+
+    <p>A fee of £5.00 is due by credit or debit card.</p>
+
+    <form method="post" action="/service/q6">
+
+      <div class="slidecontainer">
+        <p>Add additional donation (optional)</p>
+        <div class="slider" id="mySlider">
+          <div class="slider-thumb" id="sliderThumb"></div>
+        </div>
+        <p class="govuk-!-margin-top-3">Additional donation: £<span id="demo">1</span></p>
+        <input type="hidden" id="ageValue" name="ageValue" value="0">
+      </div>
+
+      <h2 class="govuk-heading-m">Payment details</h2>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="cardNumber">Card number</label>
+        <input class="govuk-input" id="cardNumber" name="cardNumber" autocomplete="off" type="text"
+          value="{{ data.cardNumber }}">
+      </div>
+
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" role="group" aria-describedby="expiry-hint">
+          <legend class="govuk-fieldset__legend">
+            Expiry date
+          </legend>
+          <div id="expiry-hint" class="govuk-hint">
+            For example, 03 2007
+          </div>
+          <div class="govuk-date-input" id="expiry">
+
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="expiry-month">
+                  Month
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="expiry-month"
+                  autocomplete="off" name="expiry-month" type="text" inputmode="numeric">
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="expiry-year">
+                  Year
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="expiry-year"
+                  autocomplete="off" name="expiry-year" type="text" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="cvv">CVV number</label>
+        <input class="govuk-input  govuk-input--width-3" id="cvv" name="cvv" autocomplete="off" type="text"
+          value="{{ data.cvv }}">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="email">Email address</label>
+        <div id="email-hint" class="govuk-hint">
+          We'll send a confirmation email to this address
+        </div>
+        <input class="govuk-input" id="email" name="email" autocomplete="off" type="text" value="{{ data.email }}">
+      </div>
+
+
+      <p>Payment due: <span id="total">£5.00</span></p>
+
+      <button class="govuk-button" data-module="govuk-button" type="submit">Pay the fee</button>
+    </form>
+  </div>
+</div>
+
+
+<style>
+  .slidecontainer {
+    width: 100%;
+  }
+
+  .slider {
+    position: relative;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    cursor: pointer;
+  }
+
+  .slider-thumb {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #00703c;
+    cursor: pointer;
+  }
+</style>
+<div id="sessionData" data-age-value="{{data.ageValue}}"></div>
+<script>
+  var slider = document.getElementById("mySlider");
+  var thumb = document.getElementById("sliderThumb");
+  var output = document.getElementById("demo");
+  var totalOutput = document.getElementById("total"); // Get the total amount element
+  var hiddenInput = document.getElementById("ageValue");
+  var sessionDataElement = document.getElementById('sessionData');
+
+  var ageValue = sessionDataElement.dataset.ageValue;
+
+  var initialValue = ageValue !== '' ? parseInt(ageValue) : 0;
+
+  // Adjust slider to the initial value
+  var sliderWidth = slider.offsetWidth;
+  var maxValue = 50; // Adjust if the maximum value of the slider changes
+  updateAge(initialValue);
+
+  function setThumbPositionByValue(value) {
+    var position = value / maxValue * (slider.offsetWidth - thumb.offsetWidth);
+    thumb.style.left = position + 'px';
+  }
+
+  setThumbPositionByValue(initialValue);
+
+  thumb.addEventListener('mousedown', function (e) {
+    e.preventDefault(); // Prevent text selection
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+
+    function onMouseMove(e) {
+      var newLeft = e.clientX - slider.getBoundingClientRect().left - thumb.offsetWidth / 2;
+
+      // Boundary conditions
+      if (newLeft < 0) {
+        newLeft = 0;
+      }
+      var rightEdge = slider.offsetWidth - thumb.offsetWidth;
+      if (newLeft > rightEdge) {
+        newLeft = rightEdge;
+      }
+
+      thumb.style.left = newLeft + 'px';
+
+      // Update the value and total
+      var value = Math.round(newLeft / rightEdge * maxValue);
+      updateAge(value);
+    }
+
+    function onMouseUp() {
+      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', onMouseMove);
+    }
+  });
+
+  function updateAge(value) {
+    output.innerHTML = value;
+    hiddenInput.value = value;
+    updateTotal(value); // Update the total amount
+  }
+
+  function updateTotal(additionalDonation) {
+    var baseFee = 5; // Base fee of £5.00
+    var total = baseFee + additionalDonation;
+    totalOutput.innerHTML = '£' + total.toFixed(2); // Update the total amount displayed
+  }
+
+  // Initial call to update the total based on the initial value
+  updateTotal(initialValue);
+</script>
+
+
+{% endblock %}

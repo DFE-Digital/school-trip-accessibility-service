@@ -1,0 +1,125 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Details" %}
+
+
+{% block beforeContent %}
+<a href="/service/q1" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% set permission = false %}
+
+{% for error in errors %}
+{% if error.field === 'permission' %}
+{% set permission = true %}
+{% endif %}
+{% endfor %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+
+    <form action="/service/q2" method="post">
+
+      {% if errors %}
+      <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1"
+        data-module="govuk-error-summary">
+        <h2 class="govuk-error-summary__title" id="error-summary-title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            {% for error in errors %}
+            <li>
+              <a href="#{{ error.field }}">{{ error.message }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+      <h1 class="govuk-heading-l">Trip details</h1>
+
+      <img src="/public/images/nhm.jpeg" style="width:100%" class="govuk-!-margin-bottom-5">
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Destination
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Natural History Museum - London
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Date of trip
+          </dt>
+          <dd class="govuk-summary-list__value">
+            18 June 2024
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Pupil
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Jack Sparrow
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Fee due
+          </dt>
+          <dd class="govuk-summary-list__value">
+            £5.00
+          </dd>
+        </div>
+      </dl>
+
+      <div class="govuk-form-group {% if permission === true %}govuk-form-group--error{% endif %}">
+        <fieldset class="govuk-fieldset" aria-describedby="permission-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h1 class="govuk-fieldset__heading">
+              Do you give permission for your child to attend this trip?
+            </h1>
+          </legend>
+          {% if permission === true %}
+          <p id="permission-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Select an option
+          </p>
+          {% endif %}
+          <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="permission" name="permission" type="radio" value="Yes">
+              <label class="govuk-label govuk-radios__label" for="permission">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="permission-2" name="permission" type="radio" value="No">
+              <label class="govuk-label govuk-radios__label" for="permission-2">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

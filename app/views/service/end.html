@@ -1,0 +1,27 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Index" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-panel govuk-panel--confirmation" style="text-align: left;">
+            <h1 class="govuk-panel__title">
+                You have not given permission
+            </h1>
+            <div class="govuk-panel__body govuk-!-margin-bottom-5">
+                You can now close this window.
+            </div>
+            <form method="get" action="/service">
+
+                <button type="submit" id="closetab" class="govuk-button govuk-!-margin-bottom-0"
+                    data-module="govuk-button">
+                    Return to start
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

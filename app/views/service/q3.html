@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Details" %}
+
+{% block beforeContent %}
+
+<a href="/service/q2" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% set contactName = false %}
+{% set phone = false %}
+
+{% for error in errors %}
+{% if error.field === 'contactName' %}
+{% set contactName = true %}
+{% endif %}
+{% if error.field === 'phone' %}
+{% set phone = true %}
+{% endif %}
+{% endfor %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h2 class="govuk-heading-l">Emergency contact details</h2>
+
+    <p>We need contact details of someone who the organiser can contact in the event of an emergency.</p>
+
+    <form method="post" action="/service/q3">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="name">Contact name</label>
+        <input class="govuk-input" id="contactName" name="contactName" type="text" value="{{ data.contactName }}">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="phone">Phone number</label>
+        <input class="govuk-input" id="phone" name="phone" type="tel" autocomplete="mobile" value="{{ data.phone }}">
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

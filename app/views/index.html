@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set serviceName ="The inaccessible service" %}
+
 {% set pageName="Home" %}
 
 {% block content %}
@@ -7,13 +9,73 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+
 
     <h1 class="govuk-heading-xl">
-      {{ serviceName }}
+      Read carefully before you continue
     </h1>
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    <p class="govuk-body">
+      This service has been developed by the Department for Education as a training service.</p>
+    <p class="govuk-body">This is not a real service and is not indicative of real services designed and built by
+      government departments or
+      organisations.</p>
+
+    <h2 class="govuk-heading-m">
+      What the service is
+    </h2>
+
+    <p class="govuk-body">This is a fictional service which enables parents and carers to give permission for their
+      child to go on a school trip to a museum.</p>
+
+
+    <h1 class="govuk-heading-l">
+      Why we have created this service
+    </h1>
+
+    <p class="govuk-body">
+      This service has deliberately been designed to be difficult to use, for example:</p>
+
+    <ol class="govuk-list govuk-list--numbers">
+      <li>the service has known accessibility issues</li>
+      <li>there are usability issues</li>
+      <li>there is language that is not considered inclusive</li>
+    </ol>
+
+
+    <p class="govuk-body">This service has been designed to help you learn and understand about accessibility,
+      usability, and inclusive design issues in digital
+      services.
+    </p>
+
+
+
+    <h3 class="govuk-heading-l">
+      Get started
+    </h3>
+
+    <p>Use the service and see how many issues you can find.</p>
+
+
+    <a href="/service" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+      Start now
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+        viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+      </svg>
+    </a>
+
+
+    <h2 class="govuk-heading-m">
+      Give feedback about this service
+    </h2>
+
+    <p>If you have any feedback, comments, questions or ideas for this service, you can <a
+        href="https://design.education.gov.uk/design-ops">contact the DesignOps team</a> at the Department for Education
+      who have built this service.</p>
+
+
+
   </div>
 </div>
 

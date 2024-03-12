@@ -1,0 +1,85 @@
+{% extends "layouts/broken.html" %}
+
+{% set pageName="Details" %}
+
+{% block beforeContent %}
+
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/service">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/service/q3">Emergency contact details</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      Confirm your child's details
+    </li>
+  </ol>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Confirm your child's details</h1>
+
+
+    <form method="post" action="/service/q4">
+
+
+      <div class="reorder-form-groups">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="medical-hint">
+            <legend class="govuk-fieldset__legend ">
+              Does your child have any medical conditions we should be aware of?
+            </legend>
+
+            <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="medical" name="medical" type="radio" value="Yes">
+                <label class="govuk-label govuk-radios__label" for="medical">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="medical-2" name="medical" type="radio" value="No">
+                <label class="govuk-label govuk-radios__label" for="medical-2">
+                  No
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="childName">Name of your child</label>
+          <input class="govuk-input" id="childName" name="childName" type="text" value="{{ data.childName }}">
+        </div>
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
+
+    </form>
+  </div>
+</div>
+
+<style>
+  .reorder-form-groups {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reorder-form-groups .govuk-form-group:nth-child(1) {
+    order: 2;
+  }
+
+  .reorder-form-groups .govuk-form-group:nth-child(2) {
+    order: 1;
+  }
+</style>
+
+{% endblock %}

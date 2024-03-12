@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Details" %}
+
+{% block beforeContent %}
+
+<a href="/service/q6" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Paws in Class: Bringing Learning and Play Together with Dogs</h1>
+
+    <form method="post" action="/service/q7">
+
+      
+
+      <img src="/public/images/dog.jpeg" style="width:100%">
+     
+
+      <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
