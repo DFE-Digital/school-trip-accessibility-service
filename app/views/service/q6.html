@@ -42,19 +42,21 @@
 
     <h1 class="govuk-heading-l">Pay the fee</h1>
 
-    <p>A fee of £5.00 is due by credit or debit card.</p>
+    <p>A fee of £5.00 is due, enter your credit or debit card details in the green section.</p>
 
     <form method="post" action="/service/q6">
 
-      <div class="slidecontainer">
-        <p>Add additional donation (optional)</p>
+      <div class="slidecontainer govuk-inset-text">
+        <h1 class="govuk-heading-m">Add a donation</h1>
+        <p>This is optional and supports the school with extra-curricular activities.</p>
         <div class="slider" id="mySlider">
           <div class="slider-thumb" id="sliderThumb"></div>
         </div>
-        <p class="govuk-!-margin-top-3">Additional donation: £<span id="demo">1</span></p>
+        <p class="govuk-!-margin-top-3 govuk-!-margin-bottom-0">Additional donation: £<span id="demo">1</span></p>
         <input type="hidden" id="ageValue" name="ageValue" value="0">
       </div>
 
+      <div style="padding: 20px; background: #cdd4d2">
       <h2 class="govuk-heading-m">Payment details</h2>
 
       <div class="govuk-form-group">
@@ -79,7 +81,7 @@
                 <label class="govuk-label govuk-date-input__label" for="xxx2-month">
                   Month
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="expiry-month"
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="xxx2-month"
                   autocomplete="off" name="xxx2-month" type="text" inputmode="numeric">
               </div>
             </div>
@@ -88,7 +90,7 @@
                 <label class="govuk-label govuk-date-input__label" for="xxx3-year">
                   Year
                 </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="expiry-year"
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="xxx3-year"
                   autocomplete="off" name="xxx3-year" type="text" inputmode="numeric">
               </div>
             </div>
@@ -115,6 +117,8 @@
       <p>Payment due: <span id="total">£5.00</span></p>
 
       <button class="govuk-button" data-module="govuk-button" type="submit">Pay the fee</button>
+
+      </div>
     </form>
   </div>
 </div>
